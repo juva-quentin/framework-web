@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     for (let i = 0; i<3; i++) {
       this.get5RandomAlcool()
     }
-    // this.getAlcoolicList()
+    this.getAlcoolicList()
   }
 
   private errorHandler(errorResponse: HttpErrorResponse): void {
