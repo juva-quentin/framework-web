@@ -1,4 +1,3 @@
-
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AlcoolService } from '@services/alcool-service.service'
 import { Subject, takeUntil, tap } from 'rxjs'
@@ -23,6 +22,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   loading = false
 
   activeSlideIndex = 0
+
+  randomColor: string | undefined
   constructor(
     private alcoolService : AlcoolService
   ) {}
@@ -32,8 +33,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.get5RandomAlcool()
     }
     this.getAlcoolicList()
+    this.setRandomColor()
+    setInterval(() => {
+      this.setRandomColor()
+    }, 2000)
   }
 
+  setRandomColor() {
+    const letters = '0123456789ABCDEF'
+    let color = '#'
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)]
+    }
+    this.randomColor = color
+  }
   private errorHandler(errorResponse: HttpErrorResponse): void {
     this.errorMessage = errorResponse.error.error ?? `${errorResponse.error.status} - ${errorResponse.error.statusText}`
   }
@@ -44,7 +57,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         next: response => {
           this.randomList.push(response.drinks[0])
           this.loading = false
-          console.log(this.loading)
         },
         error: errorResponse => {
           this.loading = false
@@ -57,9 +69,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.alcoolService.alcoolicAlcool() .pipe(tap(() => this.loading = true), takeUntil(this.unsubsribe))
       .subscribe({
         next: response => {
-          this.alcoolicList.push(response.drinks[0])
+          this.alcoolicList = response.drinks
           this.loading = false
-          console.log(this.loading)
         },
         error: errorResponse => {
           this.loading = false

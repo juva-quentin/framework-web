@@ -8,7 +8,7 @@ import { Alcool, Drinks } from '@models/alcool'
 })
 export class AlcoolService {
 
-  private baseUrl = 'http://www.thecocktaildb.com/api/json/v1/1/'
+  private baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,7 +23,9 @@ export class AlcoolService {
   }
 
   alcoolicAlcool(): Observable<Drinks> {
-    return this.httpClient.get<Drinks>(`${this.baseUrl}/filter.php?a=Alcoholic`)
+    return this.httpClient.get<Drinks>(`${this.baseUrl}/filter.php`, {
+        params: new HttpParams().set('a', 'Alcoholic')
+      })
   }
 
 }

@@ -13,7 +13,7 @@
 }
 .carousel {
   margin-bottom: 20px;
-  background-color: #000;
+  background: url('https://i.gifer.com/fetch/w300-preview/17/1737f32740d4dc7f665a2ebebf5bb51f.gif') ;
 }
 
 .carousel-indicators li {
@@ -77,23 +77,15 @@
   box-sizing: border-box;
 }
 
-html {
-  background-color: #ecf9ff;
-}
-
-body {
-  color: #272727;
-  font-family: 'Quicksand', serif;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
-  padding: 1rem;
+.back{
+  background-image: url('https://media.tenor.com/u2B1WaIsmN8AAAAd/lalcool-cest-pas-cool-pas-cool.gif');
 }
 
 .main{
   max-width: 1200px;
   margin: 0 auto;
 }
+
 
 h1 {
   font-size: 24px;
