@@ -1,0 +1,23 @@
+<form id="login-form" (ngSubmit)="login()" [formGroup]="authForm">
+  <h1>{{title}}</h1>
+  <p>Fill out this form to login.</p>
+  <div *ngIf="errorMessage">
+    <strong>Warning!</strong> {{errorMessage}}
+  </div>
+  <label for="email"  [class.ng-invalid]="authForm.dirty && emailController?.invalid">Email</label>
+  <input  type="text" placeholder="Enter your email" id="email" formControlName="email" required />
+  <small *ngIf="authForm.dirty && emailController?.hasError('required')">This field is required</small>
+
+  <label for="psw" [class.ng-invalid]="authForm.dirty && passwordController?.invalid">Password</label>
+  <input type="password" placeholder="Enter your password" id="psw" formControlName="password" required />
+  <small *ngIf="authForm.dirty && passwordController?.hasError('required')">This field is required</small>
+  <small *ngIf="passwordController?.hasError('password.pattern')">{{passwordController?.getError('password.pattern')}}</small>
+
+  <div class="button-container">
+    <button type="button" (click)="register()" [disabled]="authForm.invalid">Register</button>
+    <button type="submit" [disabled]="authForm.invalid">Login</button>
+  </div>
+</form>
+
+
+

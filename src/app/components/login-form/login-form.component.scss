@@ -1,0 +1,7 @@
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+label.ng-invalid, input.ng-invalid.ng-dirty + small {
+  color: red;
+}

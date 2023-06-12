@@ -1,0 +1,52 @@
+<ng-container *ngIf="errorMessage !== ''">
+  <div class="error">{{errorMessage}}</div>
+</ng-container>
+<ng-template #elseError>
+
+
+<div class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let alcohol of randomList; let i = index" [ngClass]="{'active': i === activeSlideIndex}">
+        <ng-container *ngIf="!loading else elseBlockCarousel">
+          <img class="d-block w-100 carousel-image" src="{{ alcohol.strDrinkThumb }}" alt="{{ alcohol.strDrink }}">
+          <div class="carousel-caption">
+            <h3>{{ alcohol.strDrink }}</h3>
+            <p>{{ alcohol.strAlcoholic }}</p>
+          </div>
+        </ng-container>
+        <ng-template #elseBlockCarousel>
+          <span class="loader"></span>
+        </ng-template>
+      </div>
+    </div>
+    <a class="carousel-control-prev" (click)="navigateCarousel(-1)">
+      Retour
+    </a>
+    <a class="carousel-control-next" (click)="navigateCarousel(1)">
+      Suivant
+    </a>
+  </div>
+ <ng-container *ngIf="!loading else elseBlock">
+   <section class="cards">
+     <div class="card">
+       <div class="card__image-container">
+         <img
+           src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80"
+         />
+       </div>
+       <div class="card__content">
+         <p class="card__title text--medium">
+           Here's the Title of an Awesome Course
+         </p>
+         <div class="card__info">
+           <p class="text--medium">30 Min</p>
+           <p class="card__price text--medium">Free</p>
+         </div>
+       </div>
+     </div>
+   </section>
+ </ng-container>
+<ng-template #elseBlock>
+  <span class="loader"></span>
+</ng-template>
+</ng-template>
