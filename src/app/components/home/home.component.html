@@ -2,47 +2,45 @@
   <div class="error">{{errorMessage}}</div>
 </ng-container>
 <ng-template #elseError>
-  <div class="carousel">
+  <div>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" *ngIf="!loading else elseBlockCarousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
       <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let alcohol of randomList; let i = index" [ngClass]="{'active': i === activeSlideIndex}">
-          <ng-container *ngIf="!loading else elseBlockCarousel">
-            <img class="d-block w-100 carousel-image" src="{{ alcohol.strDrinkThumb }}" alt="{{ alcohol.strDrink }}">
-            <div class="carousel-caption">
-              <h3 class="blinking-title" [style.color]="randomColor">{{ alcohol.strDrink }}</h3>
-              <p class="blinking-title" [style.color]="randomColor">{{ alcohol.strAlcoholic }}</p>
-            </div>
-          </ng-container>
-          <ng-template #elseBlockCarousel>
-            <span class="loader"></span>
-          </ng-template>
+        <div class="carousel-item" *ngFor="let alcohol of randomList; let i = index" [ngClass]="{'active': i === activeSlideIndex}" (click)=goToDetail(alcohol.idDrink)>
+          <img src="{{ alcohol.strDrinkThumb }}" class="d-block w-50 m-auto" alt="{{ alcohol.strDrink }}">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ alcohol.strDrink }}</h5>
+            <p>{{ alcohol.strAlcoholic }}</p>
+          </div>
         </div>
       </div>
-      <a class="carousel-control-prev " [style.color]="randomColor" (click)="navigateCarousel(-1)">
-        Retour
-      </a>
-      <a class="carousel-control-next blinking-title" [style.color]="randomColor" (click)="navigateCarousel(1)">
-        Suivant
-      </a>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-   <ng-container *ngIf="!loading else elseBlock">
-     <div class="back">
-       <div class="main">
-         <h1 class="blinking-title" [style.color]="randomColor">Cocktails avec alcooooool</h1>
-         <ul class="cards" >
-           <li class="cards_item" *ngFor="let alcool of alcoolicList">
-             <div class="card">
-               <div class="card_image"><img src="{{alcool.strDrinkThumb}}"></div>
-               <div class="card_content">
-                 <h2 class="card_title">{{alcool.strDrink}}</h2>
-                 <button class="btn card_btn">Voir les details</button>
-               </div>
-             </div>
-           </li>
-         </ul>
-       </div>
-     </div>
-   </ng-container>
+    <ng-template #elseBlockCarousel>
+      <div class="loader-container">
+        <div class="loader"></div>
+      </div>
+    </ng-template>
+  </div>
+  <div class="list-container">
+    <app-list-alcool *ngIf="!loading else elseBlock" [alcoolList]="alcoolicList" [title]="'Recette avec Alcoooll'" (getDetails)="goToDetail($event)"></app-list-alcool>
+  </div>
+
   <ng-template #elseBlock>
-    <span class="loader"></span>
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+
   </ng-template>
 </ng-template>

@@ -11,28 +11,21 @@
   background-position: 10px center;
   max-width: 460px;
 }
-.carousel {
-  margin-bottom: 20px;
-  background: url('https://i.gifer.com/fetch/w300-preview/17/1737f32740d4dc7f665a2ebebf5bb51f.gif') ;
+
+.carousel{
+  background-color: #363636;
 }
 
-.carousel-indicators li {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 5px;
+.list-container {
+  padding: 1em;
 }
 
-.carousel-indicators .active {
-  background-color: #fff;
-}
-
-.carousel-image {
-  object-fit: contain;
-  max-height: 700px;
-  width: 100%;
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* Ajustez la hauteur selon vos besoins */
+  margin-bottom: 20px; /* Espace entre les conteneurs de loaders */
 }
 
 .loader {
@@ -40,14 +33,13 @@
   height: 48px;
   border: 3px solid #FFF;
   border-radius: 50%;
-  display: inline-block;
   position: relative;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
+
 .loader::after {
   content: '';
-  box-sizing: border-box;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -59,6 +51,7 @@
   border-bottom-color: #FF3D00;
 }
 
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -68,113 +61,3 @@
   }
 }
 
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
-
-/* Design */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-.back{
-  background-image: url('https://media.tenor.com/u2B1WaIsmN8AAAAd/lalcool-cest-pas-cool-pas-cool.gif');
-}
-
-.main{
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-
-h1 {
-  font-size: 24px;
-  font-weight: 400;
-  text-align: center;
-}
-
-img {
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
-.btn {
-  color: #ffffff;
-  padding: 0.8rem;
-  font-size: 14px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  font-weight: 400;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-}
-
-.btn:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cards_item {
-  display: flex;
-  padding: 1rem;
-}
-
-@media (min-width: 40rem) {
-  .cards_item {
-    width: 50%;
-  }
-}
-
-@media (min-width: 56rem) {
-  .cards_item {
-    width: 33.3333%;
-  }
-}
-
-.card {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.card_content {
-  padding: 1rem;
-  background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
-}
-
-.card_title {
-  color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  margin: 0px;
-}
-
-.card_text {
-  color: #ffffff;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-  font-weight: 400;
-}
-.made_by{
-  font-weight: 400;
-  font-size: 13px;
-  margin-top: 35px;
-  text-align: center;
-}

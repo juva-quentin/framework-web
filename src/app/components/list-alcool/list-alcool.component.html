@@ -1,0 +1,6 @@
+<div class="main">
+    <h1>{{title}}</h1>
+    <div class="cards" >
+      <app-alcool-card *ngFor="let alcool of alcoolList" [alcool]="alcool" (getDetails)="details($event)"></app-alcool-card>
+    </div>
+</div>

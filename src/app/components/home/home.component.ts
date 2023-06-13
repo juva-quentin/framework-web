@@ -3,6 +3,7 @@ import { AlcoolService } from '@services/alcool-service.service'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { HttpErrorResponse } from '@angular/common/http'
 import { Alcool } from '@models/alcool'
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   randomColor: string | undefined
   constructor(
-    private alcoolService : AlcoolService
+    private alcoolService : AlcoolService,
+    private router : Router
   ) {}
 
   ngOnInit() {
@@ -33,28 +35,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.get5RandomAlcool()
     }
     this.getAlcoolicList()
-    this.setRandomColor()
-    setInterval(() => {
-      this.setRandomColor()
-    }, 2000)
   }
 
-  setRandomColor() {
-    const letters = '0123456789ABCDEF'
-    let color = '#'
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)]
-    }
-    this.randomColor = color
-  }
   private errorHandler(errorResponse: HttpErrorResponse): void {
     this.errorMessage = errorResponse.error.error ?? `${errorResponse.error.status} - ${errorResponse.error.statusText}`
   }
 
   get5RandomAlcool() {
-    this.alcoolService.randomAlcool() .pipe(tap(() => this.loading = true), takeUntil(this.unsubsribe))
+    this.loading = true
+    this.alcoolService.randomAlcool() .pipe(takeUntil(this.unsubsribe))
       .subscribe({
         next: response => {
+          console.log(this.loading)
           this.randomList.push(response.drinks[0])
           this.loading = false
         },
@@ -66,7 +58,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getAlcoolicList() {
-    this.alcoolService.alcoolicAlcool() .pipe(tap(() => this.loading = true), takeUntil(this.unsubsribe))
+    this.loading = true
+    this.alcoolService.alcoolicAlcool() .pipe(takeUntil(this.unsubsribe))
       .subscribe({
         next: response => {
           this.alcoolicList = response.drinks
@@ -79,16 +72,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
   }
 
-  navigateCarousel(direction: number) {
-    const newIndex = this.activeSlideIndex + direction
-
-    if (newIndex < 0) {
-      this.activeSlideIndex = this.randomList.length - 1
-    } else if (newIndex >= this.randomList.length) {
-      this.activeSlideIndex = 0
-    } else {
-      this.activeSlideIndex = newIndex
-    }
+  goToDetail(id: string) {
+    this.router.navigate(['/details'], { queryParams: { id: id }})
   }
 
   ngOnDestroy(): void {

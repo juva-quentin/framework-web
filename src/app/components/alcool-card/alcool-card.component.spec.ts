@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AlcoolComponent } from './alcool.component'
+import { AlcoolCardComponent } from './alcool-card.component'
 
-describe('AlcoolComponent', () => {
-  let component: AlcoolComponent
-  let fixture: ComponentFixture<AlcoolComponent>
+describe('AlcoolCardComponent', () => {
+  let component: AlcoolCardComponent
+  let fixture: ComponentFixture<AlcoolCardComponent>
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [AlcoolComponent]
+      declarations: [AlcoolCardComponent]
     })
     .compileComponents()
 
-    fixture = TestBed.createComponent(AlcoolComponent)
+    fixture = TestBed.createComponent(AlcoolCardComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

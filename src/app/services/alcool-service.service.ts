@@ -28,4 +28,10 @@ export class AlcoolService {
       })
   }
 
+  alcoolDetails(id: string): Observable<Drinks> {
+    return this.httpClient.get<Drinks>(`${this.baseUrl}/lookup.php`, {
+      params: new HttpParams().set('i', id)
+    })
+  }
+
 }

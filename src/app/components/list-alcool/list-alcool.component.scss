@@ -1,0 +1,14 @@
+.main{
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.cards {
+  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+

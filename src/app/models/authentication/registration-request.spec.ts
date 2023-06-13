@@ -1,7 +1,7 @@
-import { RegistrationRequest } from './registration-request';
+import { RegistrationRequest } from './registration-request'
 
 describe('RegistrationRequest', () => {
   it('should create an instance', () => {
-    expect(new RegistrationRequest()).toBeTruthy();
-  });
-});
+    expect(new RegistrationRequest()).toBeTruthy()
+  })
+})

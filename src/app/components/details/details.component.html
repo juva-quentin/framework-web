@@ -1,0 +1,39 @@
+<ng-container *ngIf="(asyncAlcools | async) as Drinks">
+  <ng-container *ngIf="Drinks.drinks !== null; else noAlcool">
+    <div class="container">
+      <div class="header">
+        <h1 class="title">Détails de la recette</h1>
+      </div>
+      <div class="recipe-details">
+        <div class="recipe-image">
+          <img src="{{ Drinks.drinks[0].strDrinkThumb }}" alt="{{ Drinks.drinks[0].strDrink }}">
+        </div>
+        <div class="recipe-info">
+          <h2 class="recipe-title">{{ Drinks.drinks[0].strDrink }}</h2>
+          <div class="recipe-metadata">
+            <p class="recipe-category">Catégorie : {{ Drinks.drinks[0].strCategory }}</p>
+            <p class="recipe-alcoholic">Alcoolisé ? {{ Drinks.drinks[0].strAlcoholic }}</p>
+            <p class="recipe-glass">Verre recommandé : {{ Drinks.drinks[0].strGlass }}</p>
+          </div>
+          <div class="recipe-section">
+            <h3 class="recipe-section-title">Instructions :</h3>
+            <p class="recipe-instructions">{{ Drinks.drinks[0].strInstructions }}</p>
+          </div>
+          <div class="recipe-section">
+            <h3 class="recipe-section-title">Ingrédients :</h3>
+            <ul class="recipe-ingredients">
+              <li>{{ Drinks.drinks[0].strMeasure1 }} {{ Drinks.drinks[0].strIngredient1 }}</li>
+              <li>{{ Drinks.drinks[0].strMeasure2 }} {{ Drinks.drinks[0].strIngredient2 }}</li>
+              <li>{{ Drinks.drinks[0].strMeasure3 }} {{ Drinks.drinks[0].strIngredient3 }}</li>
+              <li>{{ Drinks.drinks[0].strIngredient4 }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noAlcool>
+    <p>Aucun résultat avec cet ID</p>
+  </ng-template>
+</ng-container>
+

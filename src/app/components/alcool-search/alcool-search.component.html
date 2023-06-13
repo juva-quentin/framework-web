@@ -2,10 +2,10 @@
 <div *ngIf="errorMessage">
   <strong>Erreur!</strong> {{errorMessage}}
 </div>
-<div class="wrapper">
+<div>
   <ng-container *ngIf="(asyncAlcools | async) as Drinks">
     <ng-container *ngIf="Drinks.drinks !== null; else noAlcool">
-      <app-alcool *ngFor="let alcool of Drinks.drinks" [alcool]="alcool"></app-alcool>
+      <app-list-alcool [alcoolList]="Drinks.drinks" [title]="'Résultats'"></app-list-alcool>
     </ng-container>
     <ng-template #noAlcool>
       <p>No result</p>
