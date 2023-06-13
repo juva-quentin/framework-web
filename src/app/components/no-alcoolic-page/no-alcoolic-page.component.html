@@ -1,0 +1,15 @@
+<ng-container *ngIf="errorMessage !== '' else elseError">
+  <div class="error">{{errorMessage}}</div>
+</ng-container>
+<ng-template #elseError>
+  <div class="list-container">
+    <app-list-alcool *ngIf="!loading else elseBlock" [alcoolList]="noAlcoolicList" [title]="'Recettes à l\'eau'" (getDetails)="goToDetail($event)"></app-list-alcool>
+  </div>
+
+  <ng-template #elseBlock>
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+
+  </ng-template>
+</ng-template>

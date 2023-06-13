@@ -34,7 +34,7 @@
     </ng-template>
   </div>
   <div class="list-container">
-    <app-list-alcool *ngIf="!loading else elseBlock" [alcoolList]="alcoolicList" [title]="'Recette avec Alcoooll'" (getDetails)="goToDetail($event)"></app-list-alcool>
+    <app-list-alcool *ngIf="!loading else elseBlock" [alcoolList]="alcoolicList" [title]="'Recettes avec Alcool'" (getDetails)="goToDetail($event)"></app-list-alcool>
   </div>
 
   <ng-template #elseBlock>

@@ -15,6 +15,8 @@ import { HomeComponent } from './components/home/home.component'
 import { AlcoolCardComponent } from './components/alcool-card/alcool-card.component'
 import { ListAlcoolComponent } from './components/list-alcool/list-alcool.component'
 import { DetailsComponent } from './components/details/details.component'
+import { AlcoolicPageComponent } from './components/alcoolic-page/alcoolic-page.component'
+import { NoAlcoolicPageComponent } from './components/no-alcoolic-page/no-alcoolic-page.component'
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { DetailsComponent } from './components/details/details.component'
     HomeComponent,
     AlcoolCardComponent,
     ListAlcoolComponent,
-    DetailsComponent
+    DetailsComponent,
+    AlcoolicPageComponent,
+    NoAlcoolicPageComponent
   ],
   imports: [
     BrowserModule,

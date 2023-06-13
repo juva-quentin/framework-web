@@ -27,6 +27,12 @@ export class AlcoolService {
       })
   }
 
+  noAlcoolicAlcool(): Observable<Drinks> {
+    return this.httpClient.get<Drinks>(`${this.baseUrl}/filter.php`, {
+      params: new HttpParams().set('a', 'Non_Alcoholic')
+    })
+  }
+
   alcoolDetails(id: string): Observable<Drinks> {
     return this.httpClient.get<Drinks>(`${this.baseUrl}/lookup.php`, {
       params: new HttpParams().set('i', id)
