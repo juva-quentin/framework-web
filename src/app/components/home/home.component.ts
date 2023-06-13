@@ -3,7 +3,7 @@ import { AlcoolService } from '@services/alcool-service.service'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { HttpErrorResponse } from '@angular/common/http'
 import { Alcool } from '@models/alcool'
-import {Router} from "@angular/router";
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-home',

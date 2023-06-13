@@ -9,7 +9,6 @@ import { Alcool, Drinks } from '@models/alcool'
 export class AlcoolService {
 
   private baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1'
-
   constructor(private httpClient: HttpClient) { }
 
   search(title: string): Observable<Drinks> {

@@ -1,88 +1,77 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-}
-
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.title {
-  font-size: 32px;
-  color: #333;
-}
-
 .recipe-details {
-  display: flex;
-  align-items: center;
-}
-
-.recipe-image img {
-  width: 300px;
-  height: auto;
-  margin-right: 20px;
-  border-radius: 8px;
-}
-
-.recipe-info {
-  flex-grow: 1;
+  text-align: center;
 }
 
 .recipe-title {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.recipe-metadata {
+  font-size: 32px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
-.recipe-category,
-.recipe-alcoholic,
-.recipe-glass {
+.recipe-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.recipe-category, .recipe-glass {
+  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 10px;
-  font-size: 16px;
-  color: #777;
+  color: #888;
 }
 
-.recipe-section {
-  margin-bottom: 30px;
-}
-
-.recipe-section-title {
-  font-size: 20px;
+.ingredients-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
   color: #333;
+}
+
+.ingredient-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.ingredient-list li {
+  flex-basis: 50%;
   margin-bottom: 10px;
 }
 
-.recipe-instructions {
-  font-size: 16px;
-  line-height: 1.6;
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
   color: #555;
 }
 
-.recipe-ingredients {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.ingredient-image {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 50%;
 }
 
-.recipe-ingredients li {
-  margin-bottom: 5px;
-  font-size: 16px;
+.instructions-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.recipe-instructions {
+  text-align: justify;
+  line-height: 1.6;
   color: #555;
 }

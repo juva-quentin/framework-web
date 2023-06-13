@@ -1,6 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { finalize, Observable } from 'rxjs'
-import { Drinks } from '@models/alcool'
+import { Alcool, Drinks } from '@models/alcool'
 import { AlcoolService } from '@services/alcool-service.service'
 import { ActivatedRoute } from '@angular/router'
 
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router'
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   asyncAlcools: Observable<Drinks> | undefined
 
   errorMessage = ''
@@ -33,7 +33,6 @@ export class DetailsComponent {
       }
     })
   }
-
   getAlcoolDetails() {
     this.loading = true
     this.asyncAlcools = this.alcoolService.alcoolDetails(this.alcoolRequest).pipe(
