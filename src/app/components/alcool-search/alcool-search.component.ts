@@ -28,6 +28,7 @@ export class AlcoolSearchComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
        this.alcoolTitle = params['query']
       if (this.alcoolRequest) {
+        this.loading = false
         this.searchAlcools()
       } else {
         this.errorMessage = 'La requête de recherche est vide.'
@@ -37,9 +38,7 @@ export class AlcoolSearchComponent implements OnInit {
   }
 
   searchAlcools() {
-    this.loading = true
-    this.asyncAlcools = this.alcoolService.search(this.alcoolRequest).pipe(
-      finalize(()=>this.loading = false))
+    this.asyncAlcools = this.alcoolService.search(this.alcoolRequest)
   }
 
   get alcoolRequest(): string {

@@ -1,8 +1,11 @@
-<div *ngIf="loading">loading...</div>
+<div class="loader-container" *ngIf="loading else elseBlock">
+  <div class="loader"></div>
+</div>
+
 <div *ngIf="errorMessage">
   <strong>Erreur!</strong> {{errorMessage}}
-</div>
-<div>
+</div >
+<ng-template #elseBlock>
   <ng-container *ngIf="(asyncAlcools | async) as Drinks">
     <ng-container *ngIf="Drinks.drinks !== null; else noAlcool">
       <app-list-alcool [alcoolList]="Drinks.drinks" [title]="'Résultats'"></app-list-alcool>
@@ -11,5 +14,5 @@
       <p>No result</p>
     </ng-template>
   </ng-container>
-</div>
+</ng-template>
 

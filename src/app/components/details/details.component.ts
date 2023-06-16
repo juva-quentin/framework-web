@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core'
-import { finalize, Observable } from 'rxjs'
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {elementAt, finalize, Observable, Subject, takeUntil} from 'rxjs'
 import { Alcool, Drinks } from '@models/alcool'
 import { AlcoolService } from '@services/alcool-service.service'
 import { ActivatedRoute } from '@angular/router'
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
-  asyncAlcools: Observable<Drinks> | undefined
+export class DetailsComponent implements OnInit, OnDestroy {
+
+  alcool: Alcool | undefined
 
   errorMessage = ''
+
+  unsubsribe = new Subject<void>()
 
   alcoolTitle = ''
 
@@ -21,6 +25,11 @@ export class DetailsComponent implements OnInit {
     private alcoolService: AlcoolService,
     private route: ActivatedRoute
   ) { }
+
+  ngOnDestroy(): void {
+    this.unsubsribe.next()
+    this.unsubsribe.complete()
+  }
   ngOnInit() {
     this.loading = true
     this.route.queryParams.subscribe(params => {
@@ -33,12 +42,48 @@ export class DetailsComponent implements OnInit {
       }
     })
   }
+
+  private errorHandler(errorResponse: HttpErrorResponse): void {
+    this.errorMessage = errorResponse.error.error ?? `${errorResponse.error.status} - ${errorResponse.error.statusText}`
+  }
   getAlcoolDetails() {
     this.loading = true
-    this.asyncAlcools = this.alcoolService.alcoolDetails(this.alcoolRequest).pipe(
-      finalize(()=>this.loading = false))
+    this.alcoolService.alcoolDetails(this.alcoolRequest).pipe(takeUntil(this.unsubsribe))
+      .subscribe({
+        next: response => {
+          this.alcool = response.drinks[0]
+        },
+        error: errorResponse => {
+          this.loading = false
+          this.errorHandler(errorResponse)
+        },
+        complete: () => {
+          this.loading = false
+          this.getIngredients()
+        }
+      })
   }
+  getIngredients(): string[] {
+    const ingredients: string[] = []
+    const ingredientKeys = Object.keys(this.alcool!).filter(key =>
+      key.includes('strIngredient')
+    )
 
+    ingredientKeys.forEach(ingredientKey => {
+      const ingredientIndex = ingredientKey.slice(ingredientKey.length == 15 ? -2 : -1)
+      const measureKey = `strMeasure${ingredientIndex}`
+      if (
+        this.alcool![ingredientKey as keyof Alcool] &&
+        this.alcool![measureKey as keyof Alcool]
+      ) {
+        const ingredient = this.alcool![ingredientKey as keyof Alcool]
+        const measure = this.alcool![measureKey as keyof Alcool]
+        ingredients.push(`${ingredient} - ${measure}`)
+      }
+    })
+
+    return ingredients
+  }
   get alcoolRequest(): string {
     this.errorMessage = ''
 
