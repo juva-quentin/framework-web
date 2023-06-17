@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AlcoolService } from '@services/alcool-service.service'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { Subject, takeUntil } from 'rxjs'
 import { HttpErrorResponse } from '@angular/common/http'
 import { Alcool } from '@models/alcool'
 import { Router } from '@angular/router'

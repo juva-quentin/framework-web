@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Alcool } from '@models/alcool'
 import { Subject, takeUntil } from 'rxjs'
 import { AlcoolService } from '@services/alcool-service.service'
@@ -10,8 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http'
   templateUrl: './no-alcoolic-page.component.html',
   styleUrls: ['./no-alcoolic-page.component.scss']
 })
-export class NoAlcoolicPageComponent {
-  randomList:Alcool[] = []
+export class NoAlcoolicPageComponent implements OnInit, OnDestroy {
 
   noAlcoolicList: Alcool[] = []
 
@@ -21,9 +20,6 @@ export class NoAlcoolicPageComponent {
 
   loading = false
 
-  activeSlideIndex = 0
-
-  randomColor: string | undefined
   constructor(
     private alcoolService : AlcoolService,
     private router : Router

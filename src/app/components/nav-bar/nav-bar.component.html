@@ -30,33 +30,62 @@
     <div class="container">
       <div class="row align-items-end">
         <div class="col-md-4">
-          <div class="form-group">
-            <label for="categoryFilter">Catégorie :</label>
-            <select class="form-select" id="categoryFilter" [(ngModel)]="selectedCategory">
-              <option value="">Toutes</option>
-              <option *ngFor="let category of categories" [value]="category.strCategory">{{ category.strCategory }}</option>
-            </select>
+          <div class="container">
+            <div class="select-btn" (click)="selectBtn('cat')" [class.open]="toogleCat">
+              <span class="btn-text">Catégories</span>
+              <span class="arrow-dwn">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+            </div>
+            <ul class="list-items">
+              <li class="item" *ngFor="let category of category" (click)="addFilter('c', category.strCategory)" [class.checked]="isFilterSelected('c', category.strCategory)">
+                    <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                <span class="item-text">{{ category.strCategory }}</span>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
-            <label for="ingredientFilter">Ingrédient :</label>
-            <select class="form-select" id="ingredientFilter" [(ngModel)]="selectedIngredient">
-              <option value="">Tous</option>
-              <option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ ingredient }}</option>
-            </select>
+          <div class="container">
+            <div class="select-btn" (click)="selectBtn('ing')" [class.open]="toogleIng">
+              <span class="btn-text">Ingrédients</span>
+              <span class="arrow-dwn">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+            </div>
+            <ul class="list-items">
+              <li class="item" *ngFor="let ingredient of ingredients" (click)="addFilter('i',ingredient.strIngredient1)" [class.checked]="isFilterSelected('i', ingredient.strIngredient1)">
+                    <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                <span class="item-text">{{ ingredient.strIngredient1 }}</span>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="form-group">
-            <label for="glassFilter">Type de verre :</label>
-            <select class="form-select" id="glassFilter" [(ngModel)]="selectedGlass">
-              <option value="">Tous</option>
-              <option *ngFor="let glass of glasses" [value]="glass">{{ glass }}</option>
-            </select>
+          <div class="container">
+            <div class="select-btn" (click)="selectBtn('glass')" [class.open]="toogleGlass">
+              <span class="btn-text">Types de verres</span>
+              <span class="arrow-dwn">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+            </div>
+            <ul class="list-items">
+              <li class="item" *ngFor="let glass of glasses" (click)="addFilter('g', glass.strGlass )" [class.checked]="isFilterSelected('g', glass.strGlass)">
+                    <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                <span class="item-text">{{ glass.strGlass }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
 </ng-container>
+
+

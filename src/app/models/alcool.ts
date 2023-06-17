@@ -4,17 +4,17 @@ export interface Drinks {
 export interface Alcool {
   idDrink: string
   strDrink: string
-  strDrinkAlternate: any
+  strDrinkAlternate: null
   strTags: string
-  strVideo: any
+  strVideo: null
   strCategory: string
   strIBA: string
   strAlcoholic: string
   strGlass: string
   strInstructions: string
-  strInstructionsES: any
+  strInstructionsES: null
   strInstructionsDE: string
-  strInstructionsFR: any
+  strInstructionsFR: null
   strInstructionsIT: string
   'strInstructionsZH-HANS': string
   'strInstructionsZH-HANT': string

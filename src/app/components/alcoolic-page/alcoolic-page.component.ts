@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import {Component, OnDestroy, OnInit} from '@angular/core'
 import { Alcool } from '@models/alcool'
 import { Subject, takeUntil } from 'rxjs'
 import { AlcoolService } from '@services/alcool-service.service'
@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http'
   templateUrl: './alcoolic-page.component.html',
   styleUrls: ['./alcoolic-page.component.scss']
 })
-export class AlcoolicPageComponent implements OnInit {
+export class AlcoolicPageComponent implements OnInit, OnDestroy {
   randomList:Alcool[] = []
 
   alcoolicList: Alcool[] = []

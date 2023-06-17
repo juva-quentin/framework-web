@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core'
-import {elementAt, finalize, Observable, Subject, takeUntil} from 'rxjs'
-import { Alcool, Drinks } from '@models/alcool'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Subject, takeUntil } from 'rxjs'
+import { Alcool } from '@models/alcool'
 import { AlcoolService } from '@services/alcool-service.service'
 import { ActivatedRoute } from '@angular/router'
-import {HttpErrorResponse} from "@angular/common/http";
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Component({
   selector: 'app-details',
@@ -65,7 +65,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
   getIngredients(): string[] {
     const ingredients: string[] = []
-    const ingredientKeys = Object.keys(this.alcool!).filter(key =>
+    const ingredientKeys = Object.keys(this.alcool ?? {}).filter(key =>
       key.includes('strIngredient')
     )
 

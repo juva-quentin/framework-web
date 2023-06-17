@@ -1,7 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { Alcool, Drinks } from '@models/alcool'
+import { Drinks } from '@models/alcool'
+import { Ingredient } from '@models/Ingredient'
+import { Glass } from '@models/Glass'
+import { Category } from '@models/Category'
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +39,37 @@ export class AlcoolService {
   alcoolDetails(id: string): Observable<Drinks> {
     return this.httpClient.get<Drinks>(`${this.baseUrl}/lookup.php`, {
       params: new HttpParams().set('i', id)
+    })
+  }
+
+  getIngredients(): Observable<Ingredient> {
+    return this.httpClient.get<Ingredient>(`${this.baseUrl}/list.php`, {
+      params: new HttpParams().set('i', 'list')
+    })
+  }
+
+  getGlass(): Observable<Glass> {
+    return this.httpClient.get<Glass>(`${this.baseUrl}/list.php`, {
+      params: new HttpParams().set('g', 'list')
+    })
+  }
+
+  getCategory(): Observable<Category> {
+    return this.httpClient.get<Category>(`${this.baseUrl}/list.php`, {
+      params: new HttpParams().set('c', 'list')
+    })
+  }
+
+  alcoolWithFilter(filter : {key: string, value: string}[]) {
+    let params = new HttpParams()
+
+    for (const param of filter) {
+      params = params.append(param.key, param.value)
+    }
+    console.log(filter)
+
+    return this.httpClient.get<Drinks>(`${this.baseUrl}/filter.php`, {
+      params: params
     })
   }
 
