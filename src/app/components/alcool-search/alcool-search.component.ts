@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import {ActivatedRoute, Router} from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Drinks } from '@models/alcool'
 import { AlcoolService } from '@services/alcool-service.service'
 import { Observable, Subject, takeUntil } from 'rxjs'

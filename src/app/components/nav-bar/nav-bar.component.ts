@@ -40,7 +40,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('login')
   }
   searchAlcools():void {
-    this.router.navigate(['/search'], { queryParams: { query: this.alcoolTitle }})
+    this.router.navigate(['/recherche'], { queryParams: { query: this.alcoolTitle }})
   }
   ngOnInit(): void {
     this.getFilters()

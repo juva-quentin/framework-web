@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Alcool } from '@models/alcool'
 import { Subject, takeUntil } from 'rxjs'
 import { AlcoolService } from '@services/alcool-service.service'

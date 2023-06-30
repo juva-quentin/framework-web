@@ -7,16 +7,17 @@ import { HomeComponent } from '@components/home/home.component'
 import { DetailsComponent } from '@components/details/details.component'
 import { AlcoolicPageComponent } from '@components/alcoolic-page/alcoolic-page.component'
 import { NoAlcoolicPageComponent } from '@components/no-alcoolic-page/no-alcoolic-page.component'
+import { AuthenticationGuard } from '@guards/authentication.guard'
+import { RegisterFormComponent } from '@components/register-form/register-form.component'
 
 const routes: Routes = [
   { path: 'login', component:LoginFormComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'avec-alcool', component: AlcoolicPageComponent },
-  { path: 'sans-alcool', component: NoAlcoolicPageComponent },
-  { path: 'search', component: AlcoolSearchComponent },
-  { path: 'details', component: DetailsComponent },
+  { path: 'register', component:RegisterFormComponent },
+  {
+    path: '',
+    loadChildren: () => import('./home.module').then(m => m.HomeModule)
+  },
   { path: 'notFound', component: NotFoundComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/notFound' }
 ]
 
