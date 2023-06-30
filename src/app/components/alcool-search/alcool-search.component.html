@@ -8,7 +8,7 @@
 <ng-template #elseBlock>
   <ng-container *ngIf="(asyncAlcools | async) as Drinks">
     <ng-container *ngIf="Drinks.drinks !== null; else noAlcool">
-      <app-list-alcool [alcoolList]="Drinks.drinks" [title]="'Résultats'"></app-list-alcool>
+      <app-list-alcool [alcoolList]="Drinks.drinks" [title]="'Résultats'" (getDetails)="goToDetail($event)"></app-list-alcool>
     </ng-container>
     <ng-template #noAlcool>
       <p>No result</p>

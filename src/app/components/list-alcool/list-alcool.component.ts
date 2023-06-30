@@ -20,5 +20,6 @@ export class ListAlcoolComponent {
   }
   details(id: string) {
     this.getDetails.emit(id)
+    console.log("ooo")
   }
 }

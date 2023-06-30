@@ -11,10 +11,10 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let alcohol of randomList; let i = index" [ngClass]="{'active': i === activeSlideIndex}" (click)=goToDetail(alcohol.idDrink)>
-          <img src="{{ alcohol.strDrinkThumb }}" class="d-block w-50 m-auto" alt="{{ alcohol.strDrink }}">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>{{ alcohol.strDrink }}</h5>
-            <p>{{ alcohol.strAlcoholic }}</p>
+          <img [src]="alcohol.strDrinkThumb" [alt]="alcohol.strDrink" [class.d-block]="i === activeSlideIndex" class="w-100 mx-auto">
+          <div class="carousel-caption d-block">
+            <h5 class="text-sm">{{ alcohol.strDrink }}</h5>
+            <p class="text-sm">{{ alcohol.strAlcoholic }}</p>
           </div>
         </div>
       </div>

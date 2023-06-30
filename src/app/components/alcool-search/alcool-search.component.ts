@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 import { Drinks } from '@models/alcool'
 import { AlcoolService } from '@services/alcool-service.service'
 import { Observable, Subject, takeUntil } from 'rxjs'
@@ -23,7 +23,8 @@ export class AlcoolSearchComponent implements OnInit, OnDestroy {
   constructor(
     private alcoolService: AlcoolService,
     private route: ActivatedRoute,
-    private navbarService : NavBarService
+    private navbarService : NavBarService,
+    private router: Router
   ) { }
 
   ngOnDestroy(): void {
@@ -49,6 +50,9 @@ export class AlcoolSearchComponent implements OnInit, OnDestroy {
     this.asyncAlcools = this.alcoolService.search(this.alcoolRequest)
   }
 
+  goToDetail(id: string) {
+    this.router.navigate(['/details'], { queryParams: { id: id }})
+  }
   checkFilter() {
     this.navbarService.changeSelectedFilter.pipe(takeUntil(this.unsubsribe)).subscribe(selectedFilters => {
       this.searchWithFilter(selectedFilters)

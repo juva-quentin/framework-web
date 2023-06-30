@@ -13,7 +13,7 @@
 
 .image {
   flex: 1;
-  height: 400px;
+  min-width: 300px; /* Définissez une largeur minimale pour l'image */
   background-size: cover;
   background-position: center;
 }
@@ -43,6 +43,32 @@ li {
   font-size: 18px;
   line-height: 1.5;
 }
+
+/* Styles for responsive layout */
+@media screen and (max-width: 768px) {
+  .recipe-container {
+    flex-direction: column;
+  }
+
+  .image {
+    flex: 1;
+    min-width: auto;
+    height: 200px; /* Réduisez la hauteur de l'image */
+  }
+
+  .details {
+    padding-top: 20px; /* Ajoutez un espacement au-dessus des détails */
+  }
+
+  h1 {
+    font-size: 24px; /* Réduisez la taille du titre */
+  }
+
+  p {
+    font-size: 16px; /* Réduisez la taille du texte */
+  }
+}
+
 
 .loader-container {
   display: flex;

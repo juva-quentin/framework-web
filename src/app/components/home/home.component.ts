@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   activeSlideIndex = 0
 
-  randomColor: string | undefined
   constructor(
     private alcoolService : AlcoolService,
     private router : Router
