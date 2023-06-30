@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { LoginRequest } from '@models/authentication/login-request'
-import { RegistrationRequest } from '@models/authentication/registration-request'
 import { UserResponse } from '@models/authentication/user-response'
 import { Observable } from 'rxjs'
 
@@ -11,32 +10,33 @@ import { Observable } from 'rxjs'
 export class AuthenticationService {
 
 
-  token: string | null = null
+  private tokenKey = 'authToken'
 
   get loggedIn(): boolean {
     return this.token != null
   }
+  get token(): string | null {
+    return localStorage.getItem(this.tokenKey)
+  }
 
-  private baseUrl = 'api/user'
+  set token(value: string | null) {
+    if (value) {
+      localStorage.setItem(this.tokenKey, value)
+    } else {
+      localStorage.removeItem(this.tokenKey)
+    }
+  }
+
+  private baseUrl = 'https://sf-5-4-jwt.ld-web.net/api'
 
   constructor(private httpClient: HttpClient) { }
 
   logout() {
-    this.token = ''
+   this.token = null
   }
 
   login(loginRequest: LoginRequest): Observable<UserResponse> {
-    return this.httpClient.post<UserResponse>(`${this.baseUrl}/login`, loginRequest)
+    return this.httpClient.post<UserResponse>(`${this.baseUrl}/login_check`, loginRequest)
   }
 
-  register(loginRequest: LoginRequest): Observable<UserResponse> {
-    const registrationRequest = new RegistrationRequest(
-      loginRequest.email,
-      loginRequest.password,
-      'John',
-      'Smith'
-    )
-
-    return this.httpClient.post<UserResponse>(`${this.baseUrl}/register`, registrationRequest)
-  }
 }

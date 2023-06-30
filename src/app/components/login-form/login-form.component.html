@@ -1,23 +1,33 @@
-<form id="login-form" (ngSubmit)="login()" [formGroup]="authForm">
-  <h1>{{title}}</h1>
-  <p>Fill out this form to login.</p>
-  <div *ngIf="errorMessage">
-    <strong>Warning!</strong> {{errorMessage}}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <form id="login-form" (ngSubmit)="login()" [formGroup]="authForm">
+        <h1>{{title}}</h1>
+        <p>Veuiller remplir le formulaire.</p>
+        <div *ngIf="errorMessage" class="error-message">
+          <strong>Warning!</strong> {{errorMessage}}
+        </div>
+        <div class="form-group">
+          <label for="username" [class.ng-invalid]="authForm.dirty && usernameController?.invalid">Pseudo</label>
+          <input type="text" placeholder="Entrer votre nom d'utilisateur" id="username" formControlName="username" required />
+          <small *ngIf="authForm.dirty && usernameController?.hasError('required')" class="error-message">
+            Ce champ est requis
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="password" [class.ng-invalid]="authForm.dirty && passwordController?.invalid">Mot de passe</label>
+          <input type="password" placeholder="Enter your password" id="password" formControlName="password" required />
+          <small *ngIf="authForm.dirty && passwordController?.hasError('required')" class="error-message">
+            Ce champ est requis
+          </small>
+          <small *ngIf="passwordController?.hasError('password.pattern')" class="error-message">
+            {{passwordController?.getError('password.pattern')}}
+          </small>
+        </div>
+        <div class="button-container">
+          <button type="submit" [disabled]="authForm.invalid">Connexion</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <label for="email"  [class.ng-invalid]="authForm.dirty && emailController?.invalid">Email</label>
-  <input  type="text" placeholder="Enter your email" id="email" formControlName="email" required />
-  <small *ngIf="authForm.dirty && emailController?.hasError('required')">This field is required</small>
-
-  <label for="psw" [class.ng-invalid]="authForm.dirty && passwordController?.invalid">Password</label>
-  <input type="password" placeholder="Enter your password" id="psw" formControlName="password" required />
-  <small *ngIf="authForm.dirty && passwordController?.hasError('required')">This field is required</small>
-  <small *ngIf="passwordController?.hasError('password.pattern')">{{passwordController?.getError('password.pattern')}}</small>
-
-  <div class="button-container">
-    <button type="button" (click)="register()" [disabled]="authForm.invalid">Register</button>
-    <button type="submit" [disabled]="authForm.invalid">Login</button>
-  </div>
-</form>
-
-
-
+</div>

@@ -10,6 +10,7 @@ import { AuthenticationInterceptor } from '../interceptors/authentication.interc
 import { NavBarComponent } from '@components/nav-bar/nav-bar.component'
 import { RegisterFormComponent } from '@components/register-form/register-form.component'
 import { HomeModule } from './home.module'
+import {AuthenticationService} from "@services/authentication.service";
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { HomeModule } from './home.module'
     ReactiveFormsModule,
     HomeModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,10 +12,6 @@ export class AppComponent implements OnInit {
 
   currentUrl=''
   constructor(private authService: AuthenticationService, private router: Router) {}
-
-  get loggedIn() {
-    return this.authService.loggedIn
-  }
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

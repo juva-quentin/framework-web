@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'register', component:RegisterFormComponent },
   {
     path: '',
-    loadChildren: () => import('./home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./home.module').then(m => m.HomeModule),
+    canActivate:[AuthenticationGuard]
   },
   { path: 'notFound', component: NotFoundComponent },
   { path: '**', redirectTo: '/notFound' }

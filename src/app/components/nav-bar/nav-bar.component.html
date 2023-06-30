@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
   <div class="container-fluid">
     <a class="navbar-brand"  routerLink="/"> <img src="assets/logo.png" alt="Logo" height="36"></a>
     <a class="navbar-brand"  routerLink="/">Remix Ton Bar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" *ngIf="loggedIn">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="loggedIn">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="/">Acceuil</a>
@@ -21,7 +21,7 @@
         <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search" [(ngModel)]="alcoolTitle" id="search" type="text" name="title" >
         <button class="btn btn-outline-success" type="submit" (click)="searchAlcools()">Go</button>
       </form>
-      <button class="btn btn-outline-secondary" (click)="logout()" *ngIf="loggedIn">Déconnexion</button>
+      <button class="btn btn-outline-secondary" (click)="logout()" >Déconnexion</button>
     </div>
   </div>
 </nav>

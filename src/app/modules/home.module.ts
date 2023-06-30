@@ -8,6 +8,7 @@ import { DetailsComponent } from '@components/details/details.component'
 import { HomeRoutingModule } from './home-routing.module'
 import { AlcoolCardComponent } from '@components/alcool-card/alcool-card.component'
 import { ListAlcoolComponent } from '@components/list-alcool/list-alcool.component'
+import {AuthenticationService} from "@services/authentication.service";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,6 @@ import { ListAlcoolComponent } from '@components/list-alcool/list-alcool.compone
   imports: [
     CommonModule,
     HomeRoutingModule
-  ]
+  ],
 })
 export class HomeModule { }

@@ -15,17 +15,17 @@ import { password } from 'src/app/utils/password.validator'
 })
 export class LoginFormComponent implements OnDestroy {
 
-  title = 'Authentication'
+  title = 'Connexion'
   errorMessage = ''
   unsubsribe = new Subject<void>()
 
   readonly authForm = this.fb.group({
-    email: ['', Validators.required],
+    username: ['', Validators.required],
     password: ['', [Validators.required, password()]]
   })
 
-  get emailController(): AbstractControl<string, string> | null {
-   return this.authForm.get('email')
+  get usernameController(): AbstractControl<string, string> | null {
+   return this.authForm.get('username')
   }
 
   get passwordController(): AbstractControl<string, string> | null {
@@ -45,7 +45,7 @@ export class LoginFormComponent implements OnDestroy {
   }
 
   private errorHandler(errorResponse: HttpErrorResponse): void {
-    this.errorMessage = errorResponse.error.error ?? `${errorResponse.error.status} - ${errorResponse.error.statusText}`
+    this.errorMessage = `${errorResponse.status} - ${errorResponse.error.message}`
   }
 
   login(): void {
@@ -63,23 +63,11 @@ export class LoginFormComponent implements OnDestroy {
       })
   }
 
-  register(): void {
-    this.errorMessage = ''
-    this.authenticationService.register(this.loginRequest)
-      .pipe(takeUntil(this.unsubsribe))
-      .subscribe(
-        {
-          error: errorResponse => {
-            this.errorHandler(errorResponse)
-          }
-        }
-      )
-  }
 
   get loginRequest(): LoginRequest {
     this.errorMessage = ''
 
-    return new LoginRequest(this.emailController?.value ?? '', this.passwordController?.value ?? '')
+    return new LoginRequest(this.usernameController?.value ?? '', this.passwordController?.value ?? '')
   }
 
 }
