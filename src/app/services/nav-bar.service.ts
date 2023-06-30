@@ -15,7 +15,6 @@ export class NavBarService {
   addFilter(filters: {key: string, value: string}[]) {
     this.selectedFilters = filters
     this.changeSelectedFilter.emit(this.selectedFilters)
-    console.log(this.selectedFilters)
   }
 
 

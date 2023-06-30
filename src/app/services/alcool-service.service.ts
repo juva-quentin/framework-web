@@ -66,7 +66,6 @@ export class AlcoolService {
     for (const param of filter) {
       params = params.append(param.key, param.value)
     }
-    console.log(filter)
 
     return this.httpClient.get<Drinks>(`${this.baseUrl}/filter.php`, {
       params: params

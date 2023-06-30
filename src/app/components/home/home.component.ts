@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.alcoolService.randomAlcool() .pipe(takeUntil(this.unsubsribe))
       .subscribe({
         next: response => {
-          console.log(this.loading)
           this.randomList.push(response.drinks[0])
           this.loading = false
         },
