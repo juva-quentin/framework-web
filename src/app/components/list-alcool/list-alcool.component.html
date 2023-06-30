@@ -1,6 +1,11 @@
 <div class="main">
-    <h1>{{title}}</h1>
-    <div class="cards" >
-      <app-alcool-card *ngFor="let alcool of alcoolList" [alcool]="alcool" (getDetails)="details($event)"></app-alcool-card>
-    </div>
+  <h1>{{title}}</h1>
+  <div class="cards">
+    <app-alcool-card *ngFor="let alcool of getCurrentPageItems()" [alcool]="alcool" (getDetails)="details($event)"></app-alcool-card>
+  </div>
+  <div class="pagination">
+    <button [disabled]="currentPage === 1" (click)="previousPage()">Précédent</button>
+    <span>{{currentPage}}/{{getTotalPages()}}</span>
+    <button [disabled]="currentPage === getTotalPages()" (click)="nextPage()">Suivant</button>
+  </div>
 </div>

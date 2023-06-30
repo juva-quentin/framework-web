@@ -76,11 +76,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   prevSlide() {
-    this.slideCount = (this.slideCount - 1 + this.randomList.length) % this.randomList.length;
+    this.slideCount = (this.slideCount - 1 + this.randomList.length) % this.randomList.length
   }
 
   nextSlide() {
-    this.slideCount = (this.slideCount + 1) % this.randomList.length;
+    this.slideCount = (this.slideCount + 1) % this.randomList.length
   }
 
 

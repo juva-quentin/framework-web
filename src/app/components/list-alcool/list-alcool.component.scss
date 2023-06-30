@@ -24,3 +24,18 @@
   }
 }
 
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin-right: 10px;
+}
+
+.pagination span {
+  margin: 0 10px;
+  font-weight: bold;
+}

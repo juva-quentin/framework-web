@@ -15,11 +15,30 @@ export class ListAlcoolComponent {
   @Output()
   getDetails = new EventEmitter<string>()
 
+  currentPage = 1
+  itemsPerPage = 10
 
   constructor(private router: Router) {
   }
   details(id: string) {
     this.getDetails.emit(id)
-    console.log("ooo")
+  }
+
+  getCurrentPageItems() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage
+    const endIndex = startIndex + this.itemsPerPage
+
+    return this.alcoolList.slice(startIndex, endIndex)
+  }
+  previousPage() {
+    this.currentPage = this.currentPage - 1
+  }
+
+  nextPage() {
+    this.currentPage = this.currentPage + 1
+  }
+
+  getTotalPages() {
+    return Math.ceil(this.alcoolList.length / this.itemsPerPage)
   }
 }
