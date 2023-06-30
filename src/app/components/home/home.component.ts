@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loading = false
 
-  activeSlideIndex = 0
+  slideCount = 0
 
   constructor(
     private alcoolService : AlcoolService,
@@ -74,6 +74,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   goToDetail(id: string) {
     this.router.navigate(['/details'], { queryParams: { id: id }})
   }
+
+  prevSlide() {
+    this.slideCount = (this.slideCount - 1 + this.randomList.length) % this.randomList.length;
+  }
+
+  nextSlide() {
+    this.slideCount = (this.slideCount + 1) % this.randomList.length;
+  }
+
 
   ngOnDestroy(): void {
     this.unsubsribe.next()

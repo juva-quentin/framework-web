@@ -16,6 +16,33 @@
   background-color: #363636;
 }
 
+.carousel-image {
+  max-height: 300px;
+}
+
+@media (min-width: 576px) {
+  .carousel-image {
+    max-height: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel-image {
+    max-height: 500px;
+  }
+}
+
+@media (min-width: 992px) {
+  .carousel-image {
+    max-height: 600px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .carousel-image {
+    max-height: 700px;
+  }
+}
 
 .list-container {
   padding: 1em;
