@@ -4,7 +4,7 @@
 <ng-template #elseError>
   <div>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
+      <div class="carousel-inner" *ngIf="!loadingCarousel else elseBlockCarousel">
         <div class="carousel-item" *ngFor="let alcohol of randomList; let i = index" [class.active]="i === slideCount" (click)="goToDetail(alcohol.idDrink)">
           <img [src]="alcohol.strDrinkThumb" [alt]="alcohol.strDrink" class="d-block w-100 carousel-image">
           <div class="carousel-caption d-none d-md-block">

@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loading = false
 
+  loadingCarousel = false
+
   slideCount = 0
 
   constructor(
@@ -41,15 +43,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   get5RandomAlcool() {
-    this.loading = true
+    this.loadingCarousel = true
     this.alcoolService.randomAlcool() .pipe(takeUntil(this.unsubsribe))
       .subscribe({
         next: response => {
           this.randomList.push(response.drinks[0])
-          this.loading = false
+          this.loadingCarousel = false
         },
         error: errorResponse => {
-          this.loading = false
+          this.loadingCarousel = false
           this.errorHandler(errorResponse)
         }
       })
