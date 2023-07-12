@@ -27,7 +27,95 @@ Il est important de noter que l’utilisation du TypeScript est facultative, on 
 
 - De la même manière, nous utilisons pour effectuer une recherche, la balise @Output, qui permet d'emmètre un event, que nous écoutons dans le composant parent pour récupérer la requête de la recherche pour rediriger vers une nouvelle page avec les résultats de la recherche.
 
+## Exemple avec la fonction randomAlcool RxJS
 
+```ts
+randomAlcool(): Observable<Drinks> {
+return this.httpClient.get<Drinks>(`${this.baseUrl}/random.php`)
+}
+```
+La fonction randomAlcool() est utilisée pour récupérer une boisson aléatoire. Voici comment elle fonctionne :
+
+La fonction est déclarée avec la signature randomAlcool(): Observable<Drinks>, ce qui signifie qu'elle renvoie un observable de type Observable<Drinks>. Cet observable représente la réponse asynchrone de l'appel HTTP.
+
+À l'intérieur de la fonction, on utilise this.httpClient.get<Drinks>(...) pour effectuer un appel HTTP GET à l'URL ${this.baseUrl}/random.php (https://www.thecocktaildb.com/api/json/v1/1).
+
+La méthode get<Drinks> spécifie que nous attendons une réponse JSON du serveur qui correspondra à l'interface Drinks. Cela permet à Angular de désérialiser automatiquement la réponse JSON en un objet de type Drinks.
+
+L'appel HTTP renvoie un observable de type Observable<Drinks>, qui représente la réponse asynchrone de l'appel HTTP. Cet observable est renvoyé par la fonction randomAlcool()
+
+Nous utilisons cette fonction par exemple dans notre composant Home pour générer les cocktails aléatoire qui seront affiché dans notre carousel.
+Voici comment nous procédons: 
+```ts
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AlcoolService } from '@services/alcool-service.service';
+import { Subject, takeUntil } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Alcool } from '@models/alcool';
+import { Router } from '@angular/router';
+
+@Component({
+selector: 'app-home',
+templateUrl: './home.component.html',
+styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit, OnDestroy {
+
+randomList: Alcool[] = [];
+unsubsribe = new Subject<void>()
+// ...
+
+constructor(
+private alcoolService: AlcoolService,
+private router: Router
+) {}
+
+ngOnInit() {
+for (let i = 0; i < 3; i++) {
+this.get5RandomAlcool();
+}
+
+ngOnDestroy(): void {
+  this.unsubsribe.next()
+  this.unsubsribe.complete()
+}
+
+// ...
+}
+
+// ...
+
+get5RandomAlcool() {
+this.loadingCarousel = true;
+this.alcoolService.randomAlcool().pipe(takeUntil(this.unsubsribe))
+.subscribe({
+next: response => {
+this.randomList.push(response.drinks[0]);
+this.loadingCarousel = false;
+},
+error: errorResponse => {
+this.loadingCarousel = false;
+this.errorHandler(errorResponse);
+}
+});
+}
+
+// ...
+}
+```
+Dans la méthode get5RandomAlcool(), voici comment la fonction du service AlcoolService est utilisée :
+
+La propriété loadingCarousel est mise à true pour indiquer que le chargement est en cours. Et donc au lieux d'afficher le carousel, via un *ngIf dans le code Html, nous affichons un loader.
+
+En utilisant pipe(takeUntil(this.unsubsribe)), nous utilisons l'opérateur takeUntil de RxJS pour se désabonner de l'observable lorsque le composant est détruit. Cela évite de potentielles fuites de mémoire.
+
+Ensuite, nous utilisons la méthode subscribe() sur l'observable retourné par randomAlcool() pour souscrire aux valeurs émises.
+
+Dans la fonction de rappel next, nous recevons la réponse response contenant les détails de la boisson aléatoire. Nous ajoutons le premier élément de response.drinks à la liste randomList, puis nous mettons loadingCarousel à false pour indiquer que le chargement est terminé.
+
+Si une erreur se produit, la fonction de rappel error est appelée. Dans ce cas, nous mettons loadingCarousel à false et appelons la fonction errorHandler() pour gérer l'erreur.
+
+Voici en exemple d'utilisation de RxJS dans notre code, il represente la façcon la plus efficace pour l'utiliser tout en évitant les fuites de mémoire.   
 
 # <center> RxJS avec Angular vs React </center>
 ## Introduction
