@@ -1,4 +1,35 @@
-# RxJS avec Angular vs React
+# <center> Présentation du projet </center>
+## Introduction
+Bienvenue sur notre application web développée dans le cadre du module front-web. Notre application web a été conçue avec Angular, en utilisant l'API "TheCocktailDB".
+Dans cette application, une fois connecté, vous pourrez retrouver sur la page d'accueil un carrousel avec quelques exemples de recette de cocktail aléatoir et en dessous la liste avec pagination des cocktails avec alcool.
+Il est possible d'afficher seulement des cocktails avec ou sans alcool en naviguant sur les pages via la nav-bar.
+Une barre de recherche est aussi disponible. Une fois, une première recherche effectué, il est possible de trier les résultats en fonction de l'alcool souhaité, du type de verre ou bien de l'ingrédient principal.
+
+## Présentation d'Angular
+
+Angular est un framework Javascript côté client qui permet de réaliser des applications Cross-platform Web, Mobilie et Desktop.
+Angular est Open Source et développé par Google. Il utilise l’architecture MVM (Modèle Vue Modèle), proche du modèle MVC.
+Cela va permettre de structurer son code et bien séparer la vue (l’interface) des modèles (fonctionnement) avec ce que l’on appelle les composants .
+Les composants constituent le bloc de construction le plus élémentaire d’une interface utilisateur dans une application Angular, ce qui implique donc qu’une application Angular est une arborescence de composants.
+Le code source d’Angular est écrit en TypeScript. Le TypeScript est une couche supérieur au Javascript développé par Microsoft qui se compile en JavaScript simple. 
+Etant un language typé, il permet de créer des classes, des variables, des signatures de fonction et l’utilisation de modules. 
+Il est important de noter que l’utilisation du TypeScript est facultative, on peut tout à fait utiliser du JavaScript dans un fichier TypeScript.
+
+# Structure de note app
+
+- Lors de la connexion, nous enregistrons le token renvoyé de notre api dans le local storage. Une fois cela effectué, un Guard (service qui peut être appelé lors d'un routage) placé sur la route "home" va checker si l'utilisateur est bien connecté (si le tocken est bien présent) et en fonction va rediriger vers la page de connexion ou autoriser l'accès aux autres pages.
+
+
+- En ce qui concerne l'appel à L'API TheCocktailDB, nous utilisons notre service "alcool-service", en l'appelant dans les composants qui en ont besoin. Ce service utilise RXJS, qui est un ensemble d'outils directement intégré à Angular. Grâce à lui, les fonctions nous renvoient un observable auquel nous pouvons souscrire pour accéder à nos données de façon asynchrone et en gérant les erreurs. 
+
+
+- Pour alléger le code, nous avons créé plusieurs composant t'elle que les card des recettes. Pour les créer, nous bouclons sur une liste de cocktail et via le data-binding nous injectons un cocktail pour chaque card créée, que nous récupérons dans le composant de la card (alcool-card.ts), via la balise @Input. Nous pouvons comparer cette fonctionnalité Angular aux Props pour React.
+
+- De la même manière, nous utilisons pour effectuer une recherche, la balise @Output, qui permet d'emmètre un event, que nous écoutons dans le composant parent pour récupérer la requête de la recherche pour rediriger vers une nouvelle page avec les résultats de la recherche.
+
+
+
+# <center> RxJS avec Angular vs React </center>
 ## Introduction
 RxJS (Reactive Extensions for JavaScript) est une bibliothèque de programmation réactive qui est couramment utilisée avec Angular et React pour gérer les flux de données asynchrones et les événements. Bien que RxJS soit utilisé de manière similaire dans les deux frameworks, il existe quelques différences dans la façon dont il est intégré et utilisé.
 
@@ -27,7 +58,6 @@ RxJS (Reactive Extensions for JavaScript) est une bibliothèque de programmation
  - React : Bien que React ne soit pas directement intégré à RxJS, il est possible d'utiliser RxJS avec React en tant que bibliothèque tierce. En utilisant des bibliothèques telles que redux-observable ou rx-react, vous pouvez combiner les fonctionnalités réactives de RxJS avec la gestion de l'état de React pour créer des applications réactives et performantes.
 
 ## Conclusion
- - RxJS est un outil puissant pour gérer les flux de données asynchrones et les événements dans les applications Angular et React. Tandis qu'Angular utilise fortement RxJS et les Observables pour la gestion des flux de données, React utilise des bibliothèques tierces telles que Redux ou MobX pour atteindre des fonctionnalités similaires. Comprendre le fonctionnement de RxJS et son intégration avec les frameworks vous permettra de créer des applications réactives et performantes dans Angular et React.
+ - RxJS est un outil puissant pour gérer les flux de données asynchrones et les événements dans les applications Angular et React. Tandis qu'Angular utilise fortement RxJS et les Observables pour la gestion des flux de données, React utilise des bibliothèques tierces telles que Redux ou MobX pour atteindre des fonctionnalités similaires.
 
-
- - Note : Veuillez noter que les exemples et les approches spécifiques peuvent varier en fonction des versions spécifiques d'Angular, de React et des bibliothèques tierces utilisées. Il est recommandé de consulter la documentation officielle et les ressources supplémentaires pour plus de détails et d'exemples pratiques.
+ 
